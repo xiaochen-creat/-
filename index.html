@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b5fd7">
+  <title>用一束光看见压电陶瓷的纳米级形变</title>
+  <style>
+    :root{
+      --blue:#0b5fd7;
+      --blue2:#1f7cf2;
+      --deep:#073b87;
+      --cyan:#55c7ff;
+      --text:#173454;
+      --muted:#60758d;
+      --line:#dbeaff;
+      --bg:#f5f9ff;
+      --card:#ffffff;
+      --shadow:0 18px 45px rgba(27,93,177,.12);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC",Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 5%, rgba(85,199,255,.18), transparent 28%),
+        radial-gradient(circle at 88% 10%, rgba(31,124,242,.12), transparent 30%),
+        linear-gradient(180deg,#f8fbff 0%,#eef6ff 100%);
+      line-height:1.85;
+    }
+    .topbar{
+      height:7px;
+      background:linear-gradient(90deg,var(--deep),var(--blue2),var(--cyan),var(--blue));
+    }
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:58px 20px 36px;
+      text-align:center;
+    }
+    .hero::before,.hero::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      filter:blur(8px);
+      pointer-events:none;
+    }
+    .hero::before{
+      width:320px;height:320px;
+      background:rgba(58,160,255,.10);
+      left:-120px;top:-120px;
+    }
+    .hero::after{
+      width:280px;height:280px;
+      background:rgba(20,96,215,.08);
+      right:-100px;top:-80px;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 16px;
+      border:1px solid rgba(11,95,215,.18);
+      border-radius:999px;
+      background:rgba(255,255,255,.78);
+      color:var(--blue);
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.05em;
+      box-shadow:0 8px 20px rgba(11,95,215,.07);
+      backdrop-filter:blur(8px);
+    }
+    h1{
+      margin:22px auto 10px;
+      max-width:1000px;
+      font-size:clamp(30px,5.3vw,54px);
+      line-height:1.2;
+      color:var(--deep);
+      letter-spacing:.02em;
+    }
+    .subtitle{
+      max-width:820px;
+      margin:0 auto;
+      color:var(--muted);
+      font-size:clamp(15px,2.6vw,19px);
+    }
+    .wrap{
+      width:min(1120px,92%);
+      margin:0 auto 56px;
+    }
+    .video-card{
+      position:relative;
+      padding:14px;
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(11,95,215,.12);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .video-card::before{
+      content:"";
+      position:absolute;
+      left:0;right:0;top:0;
+      height:4px;
+      background:linear-gradient(90deg,var(--blue),var(--cyan),var(--blue2));
+    }
+    video{
+      display:block;
+      width:100%;
+      aspect-ratio:16/9;
+      background:#000;
+      border-radius:16px;
+      object-fit:contain;
+    }
+    .video-note{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:8px;
+      margin:14px 0 2px;
+      color:#71849a;
+      font-size:14px;
+    }
+    .dot{
+      width:7px;height:7px;border-radius:50%;
+      background:var(--blue2);
+      box-shadow:0 0 0 5px rgba(31,124,242,.10);
+    }
+    .section{
+      margin-top:30px;
+      padding:30px 32px;
+      background:rgba(255,255,255,.94);
+      border:1px solid rgba(11,95,215,.10);
+      border-radius:22px;
+      box-shadow:0 14px 36px rgba(27,93,177,.08);
+    }
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin:0 0 20px;
+      color:var(--deep);
+      font-size:26px;
+      line-height:1.3;
+    }
+    .section-title::before{
+      content:"";
+      width:6px;
+      height:28px;
+      border-radius:8px;
+      background:linear-gradient(180deg,var(--cyan),var(--blue));
+      box-shadow:0 4px 12px rgba(31,124,242,.25);
+    }
+    .section p{
+      margin:0 0 16px;
+      text-align:justify;
+      text-justify:inter-ideograph;
+      font-size:17px;
+    }
+    .section p:last-child{margin-bottom:0}
+    .highlight{
+      color:var(--blue);
+      font-weight:700;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-top:30px;
+    }
+    .stat{
+      padding:22px 20px;
+      text-align:center;
+      border-radius:18px;
+      background:linear-gradient(180deg,#ffffff,#f4f9ff);
+      border:1px solid var(--line);
+      box-shadow:0 10px 24px rgba(27,93,177,.07);
+    }
+    .stat b{
+      display:block;
+      color:var(--blue);
+      font-size:26px;
+      line-height:1.3;
+      margin-bottom:7px;
+    }
+    .stat span{
+      color:var(--muted);
+      font-size:14px;
+    }
+    .quote{
+      margin-top:30px;
+      padding:26px 28px;
+      text-align:center;
+      border-radius:20px;
+      background:linear-gradient(135deg,rgba(8,70,165,.96),rgba(28,119,235,.94));
+      color:#fff;
+      box-shadow:0 18px 36px rgba(10,76,174,.20);
+    }
+    .quote .big{
+      font-size:clamp(22px,4vw,32px);
+      font-weight:800;
+      letter-spacing:.08em;
+      margin-bottom:8px;
+    }
+    .quote .small{
+      color:rgba(255,255,255,.84);
+      font-size:15px;
+    }
+    footer{
+      text-align:center;
+      color:#8a9aae;
+      font-size:13px;
+      padding:8px 20px 38px;
+    }
+    @media(max-width:760px){
+      .hero{padding-top:42px}
+      .wrap{width:min(94%,1120px)}
+      .section{padding:24px 20px}
+      .section-title{font-size:22px}
+      .section p{font-size:16px}
+      .stats{grid-template-columns:1fr}
+      .stat{padding:18px}
+      .stat b{font-size:24px}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar"></div>
+
+  <header class="hero">
+    <div class="eyebrow">物理科普 · 教学多媒体资源</div>
+    <h1>用一束光看见压电陶瓷的纳米级形变</h1>
+    <p class="subtitle">从迈克尔逊干涉到PZT微位移测量，让肉眼不可见的纳米级变化真正“看得见、测得出”。</p>
+  </header>
+
+  <main class="wrap">
+    <section class="video-card">
+      <video controls playsinline preload="metadata">
+        <source src="video.mp4" type="video/mp4">
+        当前浏览器暂不支持视频播放，请更换现代浏览器后重试。
+      </video>
+      <div class="video-note">
+        <span class="dot"></span>
+        点击播放按钮观看完整教学科普视频
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">作品介绍</h2>
+
+      <p>
+        本作品是一部以压电陶瓷为主题的物理科普视频，围绕
+        <span class="highlight">“如何利用光的干涉看见压电陶瓷的纳米级形变”</span>
+        展开。作品从B超设备中的超声换能器切入，介绍压电陶瓷的逆压电效应。针对其通电后产生的纳米级形变难以直接观察和测量的问题，作品引入迈克尔逊干涉原理，通过压电陶瓷带动可动镜移动，将微小位移转化为直观可见、可以分析和计算的干涉条纹变化。
+      </p>
+
+      <p>
+        在表现形式上，作品将虚拟仿真与真实实验场景相结合。虚拟仿真动态展示可动镜位移、光程差变化以及干涉条纹冒出和缩进的规律，帮助观众理解抽象的物理原理；真实实验则通过改造迈克尔逊干涉仪，使压电陶瓷推动反射镜产生微小位移，并在接收屏上观察到条纹的周期性变化，从而真正
+        <span class="highlight">“看见”压电陶瓷的纳米级形变</span>。
+        实验在正弦波电压信号驱动条件下开展，测得该压电陶瓷在本实验装置及测试条件下的位移电压常数约为
+        <span class="highlight">143.08 nm/V</span>，直观展示了驱动电压与形变量之间的关系。
+      </p>
+
+      <p>
+        作品通过一束光和几圈干涉条纹揭示纳米级变化，体现了
+        <span class="highlight">“以小见大、见微知著”</span>
+        的科学思想。从微小形变出发，进一步展现压电材料在医疗超声、精密驱动、传感检测及新型功能材料等领域的应用价值，说明基础物理不仅是理解微观现象的钥匙，也是推动科技进步和自主创新的重要根基。
+      </p>
+    </section>
+
+    <section class="stats" aria-label="作品关键信息">
+      <div class="stat">
+        <b>迈克尔逊干涉</b>
+        <span>将微小位移转化为可观测条纹变化</span>
+      </div>
+      <div class="stat">
+        <b>虚仿 + 实验</b>
+        <span>从原理理解到真实测量形成完整闭环</span>
+      </div>
+      <div class="stat">
+        <b>143.08 nm/V</b>
+        <span>本实验装置及测试条件下的位移电压常数</span>
+      </div>
+    </section>
+
+    <section class="quote">
+      <div class="big">以小见大 · 见微知著</div>
+      <div class="small">让基础物理把原本“看不见”的世界准确呈现出来</div>
+    </section>
+  </main>
+
+  <footer>
+    教学科普视频展示页 · 建议使用 Chrome / Edge / Safari 等现代浏览器观看
+  </footer>
+</body>
+</html>
